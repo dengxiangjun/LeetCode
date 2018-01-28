@@ -1,21 +1,21 @@
 /**
  * https://leetcode.com/problems/reverse-nodes-in-k-group/description/
  * Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
- * <p>
+ * <p/>
  * k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes in the end should remain as it is.
- * <p>
+ * <p/>
  * You may not alter the values in the nodes, only nodes itself may be changed.
- * <p>
+ * <p/>
  * Only constant memory is allowed.
- * <p>
+ * <p/>
  * For example,
  * Given this linked list: 1->2->3->4->5
- * <p>
+ * <p/>
  * For k = 2, you should return: 2->1->4->3->5
- * <p>
+ * <p/>
  * For k = 3, you should return: 3->2->1->4->5
- * <p>
- * <p>
+ * <p/>
+ * <p/>
  * Created by deng on 2018/1/25.
  */
 public class ReverseNodesInKGroup {
@@ -25,7 +25,7 @@ public class ReverseNodesInKGroup {
         n2.next = n3;
         n3.next = n4;
         n4.next = n5;
-        ListNode result = reverseKGroup(n1, 2);
+        ListNode result = reverseKGroup(n1, 3);
         while (result != null) {
             System.out.println(result.val);
             result = result.next;
@@ -33,26 +33,40 @@ public class ReverseNodesInKGroup {
     }
 
     public static ListNode reverseKGroup(ListNode head, int k) {
-        if (head == null || head.next == null) return head;
-        ListNode preHead = new ListNode(-1), cur = preHead;
-        preHead.next = head;
-        while (cur.next != null) {
-            cur = reverse(cur, k);
+        ListNode begin;
+        if (head == null || head.next == null || k == 1)
+            return head;
+        ListNode dummyhead = new ListNode(-1);
+        dummyhead.next = head;
+        begin = dummyhead;
+        int i = 0;
+        while (head != null) {
+            i++;
+            if (i % k == 0) {
+                begin = reverse(begin, head.next);
+                head = begin.next;
+            } else {
+                head = head.next;
+            }
         }
-        return preHead.next;
+        return dummyhead.next;
+
     }
 
-    public static ListNode reverse(ListNode subHead, int k) {
-        ListNode head = subHead.next, pre = subHead.next, cur = subHead.next;
-        while (cur != null) {
-            ListNode pNext = cur.next;
-            if (pNext == null && k == 1) subHead.next = cur;
-            k--;
-            cur.next = pre;
-            pre = cur;
-            cur = pNext;
+    public static ListNode reverse(ListNode begin, ListNode end) {
+        ListNode curr = begin.next;
+        ListNode next, first;
+        ListNode prev = begin;
+        first = curr;
+        while (curr != end) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
-        return head;
+        begin.next = prev;
+        first.next = curr;
+        return first;
     }
 
     public static class ListNode {

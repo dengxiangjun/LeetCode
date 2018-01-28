@@ -26,7 +26,7 @@ public class SwapNodesInPairs {
         if (head == null || head.next == null) return head;
         ListNode preHead = new ListNode(-1), pre = preHead, cur = head;
         preHead.next = head;
-        while (cur !=null && cur.next != null) {
+        while (cur != null && cur.next != null) {
             pre.next = cur.next;
             cur.next = cur.next.next;
             pre.next.next = cur;
