@@ -3,7 +3,8 @@ import java.util.PriorityQueue;
 
 /**
  * https://leetcode.com/problems/merge-k-sorted-lists/description/
- * Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+ * Merge k sorted linke
+ *
  * Created by deng on 2018/1/23.
  */
 public class MergeKSortedLists {
