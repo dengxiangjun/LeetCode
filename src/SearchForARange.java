@@ -23,7 +23,7 @@ public class SearchForARange {
         if (a == null || a.length == 0) return res;
 
         int start = binarySearch(a, target);
-        if (start == a.length || a[start] != target) return res;
+        if (start == a.length || a[start] != target) return res;//没找到
 
         int end = binarySearch(a, target + 1) - 1;
         res[0] = start;

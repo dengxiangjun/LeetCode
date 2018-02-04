@@ -14,7 +14,7 @@
  */
 public class ZigZagConversion {
     public static void main(String[] args) {
-        String a = "12";
+        String a = "PAYPALISHIRING";
         String result = convert(a, 3);
         System.out.println(result);
     }
