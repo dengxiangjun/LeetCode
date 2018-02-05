@@ -24,7 +24,6 @@ public class ValidSudoku {
     }
 
     public static boolean isValidSudoku(char[][] a) {
-        int len = a.length, total = len * len;
         for (int i = 0; i < 9; i++) {
             HashSet<Character> row = new HashSet<Character>(), col = new HashSet<Character>();
             for (int j = 0; j < 9; j++) {
