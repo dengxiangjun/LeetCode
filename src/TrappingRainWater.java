@@ -13,35 +13,25 @@
  */
 public class TrappingRainWater {
     public static void main(String[] args) {
-        int[] a = {4, 2, 3};
+        int[] a = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
         int res = trap(a);
         System.out.println(res);
     }
 
     public static int trap(int[] a) {
         if (a == null || a.length == 1) return 0;
-        int i = 0;
-        while (i < a.length && a[i] == 0) i++;
-        int j = i + 1;
-        int res = 0;
-        int bottom = a[i];
-        while (j < a.length) {
-            if (a[j] < a[i]) {
-                //if (i + 1 == j) bottom = a[j];
-                j++;
-            } else if (i + 1 == j && a[j] >= a[i]) {
-                i++;
-                j++;
-            } else if (i + 1 < j && a[j] > a[i]) {
-                int height = Math.min(a[i], a[j]);
-                res += height * (j - i - 1);
-                i++;
-                while (i < j) {
-                    res -= a[i];
-                    i++;
-                }
-                j++;
-            }
+        int res = 0, max = 0;
+        int[] container = new int[a.length];
+        for (int i = 0; i < a.length; i++) {
+            max = Math.max(max, a[i]);
+            container[i] = max;
+        }
+
+        max = 0;
+        for (int i = a.length - 1; i >= 0; i--) {
+            max = Math.max(max, a[i]);
+            container[i] = Math.min(max, container[i]);
+            res += (container[i] - a[i] > 0 ? container[i] - a[i] : 0);
         }
         return res;
     }
