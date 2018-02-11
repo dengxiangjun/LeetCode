@@ -18,7 +18,7 @@
 public class JumpGameII {
 
     public static void main(String[] args) {
-        int[] a = {2, 3, 1, 1, 4};
+        int[] a = {1,2};
         int res = jump(a);
         System.out.println(res);
     }
@@ -26,9 +26,9 @@ public class JumpGameII {
     public static int jump(int[] a) {
         int ret = 0;
         int last = 0;
-        int curr = a[0];
-        int i = 1;
-        for (; i < a.length - 1 && i <= curr; ++i) {
+        int curr = 0;
+        int i = 0;
+        for (; i < a.length && i <= curr; ++i) {
             if (i > last) {
                 last = curr;
                 ++ret;
