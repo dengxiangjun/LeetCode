@@ -21,30 +21,31 @@ public class InsertInterval {
 
     public static void main(String[] args) {
         List<Interval> intervals = new ArrayList<Interval>();
-        intervals.add(new Interval(1, 2));
-        intervals.add(new Interval(3, 5));
-        intervals.add(new Interval(6, 7));
-        intervals.add(new Interval(8, 10));
-        intervals.add(new Interval(12, 16));
+        intervals.add(new Interval(0, 1));
+//        intervals.add(new Interval(3, 5));
+//        intervals.add(new Interval(6, 7));
+//        intervals.add(new Interval(8, 10));
+//        intervals.add(new Interval(12, 16));
 
-        List<Interval> res = insert(intervals, new Interval(4, 9));
+        List<Interval> res = insert(intervals, new Interval(1, 5));
         System.out.println(res);
     }
 
     public static List<Interval> insert(List<Interval> intervals, Interval newInterval) {
         List<Interval> res = new ArrayList<Interval>();
-        if (intervals == null || intervals.size() == 0) return res;
-        Collections.sort(intervals, new Comparator<Interval>() {
-            @Override
-            public int compare(Interval o1, Interval o2) {
-                return Integer.compare(o1.start, o2.start);
-            }
-        });
-        Interval prev = intervals.get(0);
-        for (int i = 0; i < intervals.size(); i++) {
-            Interval curr = intervals.get(i);
-            //if (curr.start )
+        if (intervals == null) return res;
+        if (intervals.size() == 0){
+            res.add(newInterval);
+            return res;
         }
+        int i = 0;
+        while (i < intervals.size() && intervals.get(i).end < newInterval.start) res.add(intervals.get(i++));
+        while (i < intervals.size() && intervals.get(i).start <= newInterval.end) {
+            newInterval = new Interval(Math.min(intervals.get(i).start, newInterval.start), Math.max(intervals.get(i).end, newInterval.end));
+            i++;
+        }
+        res.add(newInterval);
+        while (i < intervals.size()) res.add(intervals.get(i++));
         return res;
     }
 
