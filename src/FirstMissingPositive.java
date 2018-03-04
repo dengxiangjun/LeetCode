@@ -1,14 +1,14 @@
 /**
  * https://leetcode.com/problems/first-missing-positive/description/
  * Given an unsorted integer array, find the first missing positive integer.
- * <p/>
+ * <p>
  * For example,
  * Given [1,2,0] return 3,
  * and [3,4,-1,1] return 2.
- * <p/>
+ * <p>
  * Your algorithm should run in O(n) time and uses constant space.
- * <p/>
- * <p/>
+ * <p/>本题是给一个整数的数组，让你按顺序找出第一个缺失的正整数。
+ * <p>
  * Created by deng on 2018/2/6.
  */
 public class FirstMissingPositive {
