@@ -20,16 +20,17 @@ public class PlusOne {
     }
 
     public static int[] plusOne(int[] a) {
-        int[] res = new int[a.length + 1];
         for (int i = a.length - 1; i >= 0; i--) {
             if (a[i] + 1 > 9) {
-                res[i] = a[i] - 9;
+                a[i] = a[i] - 9;
             } else {
-                res[i] = a[i] + 1;
-                return res;
+                a[i] = a[i] + 1;
+                return a;
             }
         }
+        int[] res = new int[a.length + 1];
         res[0] = 1;
+        for (int i = 0; i < a.length; i++) res[i + 1] = a[i];
         return res;
     }
 }
