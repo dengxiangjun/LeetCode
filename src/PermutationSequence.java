@@ -27,7 +27,7 @@ public class PermutationSequence {
 
     public static String getPermutation(int n, int k) {
         int[] fib = new int[n];
-        ArrayList<Integer> a = new ArrayList<>();
+        ArrayList<Integer> a = new ArrayList<Integer>();
         for (int i = 1; i <= n; i++) a.add(i);
         fib[0] = 1;
         String res = "";
