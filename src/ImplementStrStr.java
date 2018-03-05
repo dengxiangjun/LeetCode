@@ -1,5 +1,3 @@
-package com.dxj.tp;
-
 /**
  * https://leetcode.com/problems/implement-strstr/description/
  * Implement strStr().
