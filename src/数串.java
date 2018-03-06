@@ -50,5 +50,6 @@ public class 数串 {
 
             }
         }
+        return res;
     }
 }

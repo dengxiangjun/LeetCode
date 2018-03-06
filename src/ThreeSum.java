@@ -29,7 +29,7 @@ public class ThreeSum {
             if (i > 0 && a[i - 1] == a[i]) continue;
             twoSum(a, i + 1, -a[i], res);
         }
-        return new ArrayList<>(res);
+        return new ArrayList<List<Integer>>(res);
     }
 
     public static void twoSum(int[] a, int start, int sum, Set<List<Integer>> res) {

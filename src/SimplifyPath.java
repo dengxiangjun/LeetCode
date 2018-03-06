@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -12,35 +14,19 @@ import java.util.Stack;
 public class SimplifyPath {
 
     public static void main(String[] args) {
-        String res = simplifyPath("//a//c/b../");
+        String res = simplifyPath("/a/./b/../../c/");
         System.out.println(res);
     }
 
     public static String simplifyPath(String path) {
         Stack<String> stack = new Stack<String>();
-        int j = -1;
-        for (int i = 0; i < path.length(); i++) {
-            char c = path.charAt(i);
-            if (c == '/') {
-                if (j > -1) {
-                    stack.push(path.substring(j,i));
-                    j = -1;
-                }
-                continue;
-            } else if (c == '.') {
-                if (j > -1) {
-                    stack.push(path.substring(j,i));
-                    j = -1;
-                }
-                if (i + 1 < path.length() && path.charAt(i + 1) == '.')
-                    stack.pop();
-                i++;
-            } else {
-                if (j == -1) j = i;
-            }
+        String[] p = path.split("/");
+        for (int i = 0; i < p.length; i++) {
+            String s = p[i];
+            if (s.equals("..") && !stack.isEmpty()) stack.pop();
+            else if (!s.equals(".") && !s.equals("") && !s.equals("..")) stack.push(s);
         }
-        String res = "/";
-        for (int i =0;i<stack.size();i++)  res += stack.get(i) + "/";
-        return res;
+        List<String> list = new ArrayList(stack);
+        return "/" + String.join("/", list);
     }
 }

@@ -32,7 +32,7 @@ public class TextJustification {
     }
 
     public static List<String> fullJustify(String[] words, int maxWidth) {
-        List<String> res = new ArrayList<>();
+        List<String> res = new ArrayList<String>();
         int index = 0;
         while (index < words.length) {
             int last = index + 1, count = words[index].length();
