@@ -13,6 +13,11 @@ public class ContainerWithMostWater {
         System.out.println(index);
     }
 
+    /**
+     * 双指针
+     * @param height
+     * @return
+     */
     public static int maxArea(int[] height) {
         int i = 0, j = height.length - 1;
         int max = Integer.MIN_VALUE;

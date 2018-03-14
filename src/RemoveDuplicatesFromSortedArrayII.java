@@ -13,28 +13,19 @@
 public class RemoveDuplicatesFromSortedArrayII {
 
     public static void main(String[] args) {
-        int[] a = {1, 1, 1, 2, 2, 3, 3, 5};
+        int[] a = {1, 1, 2, 2, 3, 3, 5};
         int res = removeDuplicates(a);
         System.out.println(res);
     }
 
+
     public static int removeDuplicates(int[] a) {
         if (a == null) return 0;
         if (a.length < 3) return a.length;
-        int slow = 2,
-                fast = 2;
-        while (fast < a.length) {
-            if (fast == slow ) {
-                if (a[fast] == a[fast - 1] && a[fast] == a[fast - 2]) fast++;
-                else {
-                    fast++;
-                    slow++;
-                }
-            } else {
-                if (a[fast] != a[slow]) a[slow++] = a[fast++];
-                fast++;
-            }
+        int i = 0;
+        for (int item : a) {
+            if (i < 2 || item > a[i - 2]) a[i++] = item;
         }
-        return slow + 1;
+        return i;
     }
 }
