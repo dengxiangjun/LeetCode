@@ -37,6 +37,11 @@ public class LargestRectangleInHistogram {
 //        return res;
 //    }
 
+    /**
+     * 使用栈，O(n)解法
+     * @param heights
+     * @return
+     */
     public static int largestRectangleArea(int[] heights) {
         if (heights == null || heights.length == 0) return 0;
         if (heights.length == 1) return heights[0];
