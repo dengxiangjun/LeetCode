@@ -27,15 +27,15 @@ public class Combinations {
     }
 
     public static List<List<Integer>> combine(int n, int k) {
-        List<Integer> item = new ArrayList<>();
-        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> item = new ArrayList<Integer>();
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
         dfs(item, res, 1, n, k);
         return res;
     }
 
     public static void dfs(List<Integer> item, List<List<Integer>> res, int index, int n, int k) {
         if (item.size() == k) {
-            res.add(new ArrayList<>(item));
+            res.add(new ArrayList<Integer>(item));
             return;
         }
         for (int i = index; i <= n; i++) {

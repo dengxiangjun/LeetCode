@@ -33,14 +33,14 @@ public class Subsets {
     }
 
     public static List<List<Integer>> subsets(int[] a) {
-        List<Integer> item = new ArrayList<>();
-        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> item = new ArrayList<Integer>();
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
         backtrack(a, item, res, 0);
         return res;
     }
 
     public static void backtrack(int[] a, List<Integer> item, List<List<Integer>> res, int index) {
-        res.add(new ArrayList<>(item));
+        res.add(new ArrayList<Integer>(item));
         for (int j = index; j < a.length; j++) {
             item.add(a[j]);
             backtrack(a, item, res, j + 1);
