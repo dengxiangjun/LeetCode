@@ -23,6 +23,7 @@ public class MaximalRectangle {
         if (a == null || a.length == 0) return 0;
         int[][] dp = new int[a.length][a[0].length];
         dp[0][0] = a[0][0] == 0 ? 0 : 1;
+
         for (int i = 1; i < a[0].length; i++) dp[0][i] = a[0][i - 1] == 0 ? dp[0][i - 1] : (dp[0][i - 1] + a[0][i - 1]);
         for (int i = 1; i < a.length; i++)  dp[i][0] = a[i - 1][0] == 0 ? dp[i - 1][0] : (dp[i - 1][0] + a[i - 1][0]);
         for (int i = 1; i < a.length; i++)
