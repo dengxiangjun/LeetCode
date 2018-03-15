@@ -22,6 +22,12 @@ public class MergeTwoSortedLists {
         }
     }
 
+    /**
+     * 分治法
+     * @param l1
+     * @param l2
+     * @return
+     */
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null) return l2;
         else if (l2 == null) return l1;
