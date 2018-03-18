@@ -22,36 +22,36 @@ public class ReverseLinkedListII {
         n2.next = n3;
         n3.next = n4;
         n4.next = n5;
-        ListNode res = reverseBetween(n1, 2, 4);
+        ListNode res = reverseBetween(n1, 1, 5);
         System.out.println(res);
     }
 
     public static ListNode reverseBetween(ListNode head, int m, int n) {
-        if (head == null) return head;
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode subHead = head, subPre = dummy;
-        while (m > 1) {
-            subPre = subHead;
-            subHead = subHead.next;
-            m--;
-            n--;
+        //first part
+        ListNode cur1 = dummy;
+        ListNode pre1 = null;
+        for(int i=0;i<m;i++){
+            pre1 = cur1;
+            cur1 = cur1.next;
         }
-        ListNode subTail = subHead;
-        while (n > 1) {
-            subTail = subTail.next;
-            n--;
-        }
-        ListNode subNext = subTail.next;
 
-        ListNode pre = subNext, cur = subHead;
-        while (cur == subNext) {
-            ListNode next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
+        //reverse
+        ListNode cur2 = cur1;
+        ListNode pre2 = pre1;
+        ListNode q2;
+        for(int i=m;i<=n;i++){
+            q2 = cur2.next;
+            cur2.next = pre2;
+            pre2 = cur2;
+            cur2 = q2;
         }
-        subPre.next = pre;
+
+        //connect
+        pre1.next = pre2;
+        cur1.next = cur2;
+
         return dummy.next;
     }
 
