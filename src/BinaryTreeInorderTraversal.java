@@ -23,7 +23,7 @@ public class BinaryTreeInorderTraversal {
     }
 
     public static List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
+        List<Integer> res = new ArrayList<Integer>();
         if (root == null) return res;
         Stack<TreeNode> stack = new Stack<TreeNode>();
         TreeNode cur = root;
