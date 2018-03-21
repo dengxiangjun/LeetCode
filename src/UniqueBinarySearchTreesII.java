@@ -46,7 +46,6 @@ public class UniqueBinarySearchTreesII {
                     res.add(root);
                 }
         }
-
         return res;
     }
 
