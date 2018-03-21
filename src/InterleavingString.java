@@ -13,19 +13,16 @@
 public class InterleavingString {
 
     public static void main(String[] args) {
-        String s1 = "aa", s2 = "ab", s3 = "aaba";
+        String s1 = "a", s2 = "", s3 = "a";
         boolean res = isInterleave(s1, s2, s3);
         System.out.println(res);
     }
 
     public static boolean isInterleave(String s1, String s2, String s3) {
-        if (s1 == null && s2 == null && s3 == null) return true;
-        if ((s1 == null || s2 == null) && s3 == null) return false;
-        if (s1.isEmpty()) return s2.equals(s3);
-        if (s2.isEmpty()) return s1.equals(s3);
+        if (s1 == null || s2 == null || s3 == null) return false;
         int m = s1.length(), n = s2.length();
         if (m + n != s3.length()) return false;
-        boolean[][] dp = new boolean[m + n][n + m];
+        boolean[][] dp = new boolean[n + 1][m + 1];
         dp[0][0] = true;
         for (int i = 1; i <= m; i++) {
             if (s1.charAt(i - 1) == s3.charAt(i - 1)) dp[0][i] = true;
@@ -36,15 +33,12 @@ public class InterleavingString {
             else break;
         }
 
-        for (int i = 1; i <= m; i++)
-            for (int j = 1; j <= n; j++) {
-                if (!dp[i - 1][j] && !dp[i][j - 1]) dp[i][j] = false;
-                else if (dp[i - 1][j] && !dp[i][j - 1]) {
-                    dp[i][j] = s2.charAt(j - 1) == s3.charAt(i + j - 1);
-                } else if (!dp[i - 1][j] && dp[i][j - 1]) dp[i][j] = s1.charAt(i - 1) == s3.charAt(i + j - 1);
-                else dp[i][j] = s1.charAt(i - 1) == s2.charAt(j - 1) && s1.charAt(i - 1) == s3.charAt(i + j - 1);
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= m; j++) {
+                dp[i][j] = (dp[i - 1][j] && s2.charAt(i - 1) == s3.charAt(i + j - 1))
+                        || (dp[i][j - 1] && s1.charAt(j - 1) == s3.charAt(i + j - 1));
             }
-        return dp[m][n];
+        return dp[n][m];
     }
 
 }
