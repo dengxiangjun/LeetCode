@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * https://leetcode.com/problems/path-sum-ii/description/
  * Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
- * <p>
+ * <p/>
  * For example:
  * Given the below binary tree and sum = 22,
  * 5
@@ -27,15 +27,15 @@ public class PathSumII {
     public static void main(String[] args) {
         TreeNode root = new TreeNode(5), left = new TreeNode(4), right = new TreeNode(8);
         root.left = left;
-        root.right = right;
-        left.left = new TreeNode(11);
-        left.left.left = new TreeNode(7);
-        left.left.right = new TreeNode(2);
-        //left.right = new TreeNode(9);
-        right.left = new TreeNode(13);
-        right.right = new TreeNode(4);
-        right.left.left = new TreeNode(1);
-        List<List<Integer>> res = pathSum(root, 22);
+//        root.right = right;
+//        left.left = new TreeNode(11);
+//        left.left.left = new TreeNode(7);
+//        left.left.right = new TreeNode(2);
+//        //left.right = new TreeNode(9);
+//        right.left = new TreeNode(13);
+//        right.right = new TreeNode(4);
+//        right.left.left = new TreeNode(1);
+        List<List<Integer>> res = pathSum(root, 9);
         System.out.println(res);
     }
 
@@ -48,24 +48,26 @@ public class PathSumII {
 
     public static void dfs(List<List<Integer>> res, List<Integer> item, TreeNode root, int sum) {
         if (root == null) return;
+        sum -= root.val;
+        item.add(root.val);
         if (root.left == null && root.right == null) {
-            if (root.val == sum) {
-                res.add(new LinkedList<>(item));
+            if (sum == 0) {
+                item.add(root.val);
+                res.add(new LinkedList<Integer>(item));
+                item.remove(item.size() - 1);
             }
             return;
         }
-        if (root.left != null) {
-            item.add(root.left.val);
-            dfs(res, item, root, sum - root.left.val);
+
+        if (root.left !=null){
+            dfs(res, item, root.left, sum);
             item.remove(item.size() - 1);
         }
 
-        if (root.right != null) {
-            item.add(root.right.val);
-            dfs(res, item, root, sum - root.right.val);
+        if (root.right !=null){
+            dfs(res, item, root.right, sum);
             item.remove(item.size() - 1);
         }
-        return;
     }
 
     private static class TreeNode {
