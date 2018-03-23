@@ -3,25 +3,25 @@ import java.util.List;
 /**
  * https://leetcode.com/problems/balanced-binary-tree/description/
  * Given a binary tree, determine if it is height-balanced.
- * <p/>
+ * <p>
  * For this problem, a height-balanced binary tree is defined as:
- * <p/>
+ * <p>
  * a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
  * Example 1:
- * <p/>
+ * <p>
  * Given the following tree [3,9,20,null,null,15,7]:
- * <p/>
+ * <p>
  * 3
  * / \
  * 9  20
  * /  \
  * 15   7
  * Return true.
- * <p/>
+ * <p>
  * Example 2:
- * <p/>
+ * <p>
  * Given the following tree [1,2,2,3,3,null,null,4,4]:
- * <p/>
+ * <p>
  * 1
  * / \
  * 2   2
@@ -46,8 +46,26 @@ public class BalancedBinaryTree {
         System.out.println(res);
     }
 
+    /**
+     * @param root
+     * @return
+     */
     public static boolean isBalanced(TreeNode root) {
-        return false;
+        if (root == null) return true;
+        return depth(root) != -1;
+    }
+
+    /**
+     * 使用-1代表不平衡的子树，大于等于0代表树的高度
+     * @param root
+     * @return
+     */
+    public static int depth(TreeNode root) {
+        if (root == null) return 0;
+        int leftDepth = depth(root.left);
+        int rightDepth = depth(root.right);
+        if (leftDepth == -1 || rightDepth == -1 || Math.abs(leftDepth - rightDepth) > 1) return -1;
+        return 1 + Math.max(leftDepth, rightDepth);
     }
 
     private static class TreeNode {
