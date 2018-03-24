@@ -1,3 +1,8 @@
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
  * https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
  * Given a binary tree
@@ -32,12 +37,57 @@
  */
 public class PopulatingNextRightPointersinEachNode {
 
-    public void connect(TreeLinkNode root) {
+    public static void main(String[] args) {
+        TreeLinkNode root = new TreeLinkNode(1), left = new TreeLinkNode(2), right = new TreeLinkNode(3);
+        root.left = left;
+        root.right = right;
+        left.left = new TreeLinkNode(4);
+        left.right = new TreeLinkNode(5);
+        right.left = new TreeLinkNode(6);
+        right.right = new TreeLinkNode(7);
+        connect(root);
+        System.out.println(1);
+    }
 
+//    /**
+//     * 使用队列
+//     *
+//     * @param root
+//     */
+//    public static void connect(TreeLinkNode root) {
+//        if (root == null) return;
+//        Queue<TreeLinkNode> queue = new LinkedList<TreeLinkNode>();
+//        queue.add(root);
+//        while (!queue.isEmpty()) {
+//            int levelCnt = queue.size();
+//            TreeLinkNode next = null, cur;
+//            for (int i = 0; i < levelCnt; i++) {
+//                cur = queue.poll();
+//                cur.next = next;
+//                next = cur;
+//                queue.add(cur.right);
+//                queue.add(cur.left);
+//            }
+//            queue.removeAll(Collections.singleton(null));
+//        }
+//    }
+
+    /**
+     *
+     * @param root
+     */
+    public static void connect(TreeLinkNode root) {
+        if (root == null) return;
+        if (root.left != null) {
+            root.left.next = root.right;//连接2和3
+        }
+        if (root.next != null && root.right !=null) root.right.next = root.next.left;//连接5和6
+        connect(root.left);
+        connect(root.right);
     }
 
 
-    public class TreeLinkNode {
+    private static class TreeLinkNode {
         int val;
         TreeLinkNode left, right, next;
 
