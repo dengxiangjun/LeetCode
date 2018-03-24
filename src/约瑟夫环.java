@@ -1,5 +1,3 @@
-import java.util.Arrays;
-import java.util.Scanner;
 
 /**
  * http://118.190.20.162/view.page?gpid=T67
@@ -16,7 +14,7 @@ import java.util.Scanner;
  * 　　3号小朋友报数7；
  * 　　5号小朋友报数8淘汰；
  * 　　3号小朋友获胜。
- * <p/>
+ * <p>
  * 　　给定n和k，请问最后获胜的小朋友编号为多少？
  * 输入格式
  * 　　输入一行，包括两个整数n和k，意义如题目所述。
@@ -34,13 +32,35 @@ import java.util.Scanner;
  * 　　对于所有评测用例，1 ≤ n ≤ 1000，1 ≤ k ≤ 9。
  * Created by deng on 2018/3/24.
  */
+import java.util.Scanner;
 public class 约瑟夫环 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int k = sc.nextInt();
+//        int n = 7, k = 3;
+        int res = remove(n, k);
+        System.out.println(res);
+    }
 
-        //System.out.println(diff);
+    public static int remove(int n, int k) {
+        int[] a = new int[n];
+        int num = n, i = -1, cnt = 0;
+        while (num > 0) {
+            i++;
+            if (i == n) i = i % n;
+            if (a[i] == -1) {
+                continue;
+            }
+            cnt++;
+            if (cnt == k) {
+                a[i] = -1;
+                cnt = 0;
+                num--;
+            }
+
+        }
+        return i+1;
     }
 }
