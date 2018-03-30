@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * https://leetcode.com/problems/rotate-image/description/
  * You are given an n x n 2D matrix representing an image.

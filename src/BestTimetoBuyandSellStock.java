@@ -20,19 +20,21 @@
 public class BestTimetoBuyandSellStock {
 
     public static void main(String[] args) {
-        int[] a = {7, 6, 4, 3, 1};
+        int[] a = {7, 6, 5, 3, 4,1};
         int res = maxProfit(a);
         System.out.println(res);
     }
 
-    public static int maxProfit(int[] a) {
-        int res = 0;
-        for (int i = 0; i < a.length - 1; i++)
-            for (int j = i + 1; j < a.length; j++) {
-                if (a[j] > a[i]) {
-                    res = Math.max(res,a[j] - a[i]);
-                }
+    public static int maxProfit(int[] prices) {
+        if (prices== null || prices.length == 0) return 0;
+        int res = 0, bought = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > bought) {
+                res = Math.max(res, prices[i] - bought);
+            } else {
+                bought = prices[i];
             }
+        }
         return res;
     }
 }
