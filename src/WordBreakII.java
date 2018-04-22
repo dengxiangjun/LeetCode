@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * https://leetcode.com/problems/word-break-ii/description/
@@ -33,24 +32,66 @@ public class WordBreakII {
         System.out.println(res);
     }
 
+//    /**
+//     * 暴力搜索，TLE
+//     * @param s
+//     * @param wordDict
+//     * @return
+//     */
+//    public static List<String> wordBreak(String s, List<String> wordDict) {
+//        List<String> res = new ArrayList<String>();
+//        dfs(s, wordDict, 0, new ArrayList<String>(), res);
+//        return res;
+//    }
+//
+//    public static void dfs(String s, List<String> wordDict, int start, List<String> item, List<String> res) {
+//        if (start == s.length()) {
+//            res.add(String.join(" ", new ArrayList<String>(item)));
+//            return;
+//        }
+//        for (int i = start + 1; i <= s.length(); i++) {
+//            String sub = s.substring(start, i);
+//            if (wordDict.contains(sub)) {
+//                item.add(sub);
+//                dfs(s, wordDict, i, item, res);
+//                item.remove(item.size() - 1);
+//            }
+//        }
+//    }
+
+    /**
+     * 记忆化搜索
+     * @param s
+     * @param wordDict
+     * @return
+     */
     public static List<String> wordBreak(String s, List<String> wordDict) {
         List<String> res = new ArrayList<String>();
-        dfs(s, wordDict, 0, new ArrayList<String>(), res);
+        Set<String> set = new HashSet<String>();
+        for (String word : wordDict) set.add(word);
+        Map<String, List<String>> used = new HashMap<String, List<String>>();//记忆搜索过的子串
+        res = dfs(s, set, used);
         return res;
     }
 
-    public static void dfs(String s, List<String> wordDict, int start, List<String> item, List<String> res) {
-        if (start == s.length()) {
-            res.add(String.join(" ", new ArrayList<String>(item)));
-            return;
-        }
-        for (int i = start + 1; i <= s.length(); i++) {
-            String sub = s.substring(start, i);
-            if (wordDict.contains(sub)) {
-                item.add(sub);
-                dfs(s, wordDict, i, item, res);
-                item.remove(item.size() - 1);
+    public static List<String> dfs(String s, Set<String> set, Map<String, List<String>> used) {
+        if (used.containsKey(s)) return used.get(s);
+        if (s.length() == 0) return null;
+        List<String> res = new ArrayList<String>();
+        for (int i = 1; i <= s.length(); i++) {
+            String sub = s.substring(0, i);
+            List<String> partRes = null;
+            if (set.contains(sub)) {
+                partRes = dfs(s.substring(i), set, used);
+                if (partRes == null) res.add(sub);
+                else {
+                    for (String str : partRes) {
+                        res.add(sub + " " + str);
+                    }
+                }
             }
         }
+        used.put(s, res);
+        return res;
     }
 }
