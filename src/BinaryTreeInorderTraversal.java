@@ -34,38 +34,18 @@ public class BinaryTreeInorderTraversal {
         List<Integer> res = new ArrayList<Integer>();
         if (root == null) return res;
         Stack<TreeNode> stack = new Stack<TreeNode>();
-        stack.push(root);
-
-        while (!stack.isEmpty()) {
-            TreeNode cur = stack.pop();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
             res.add(cur.val);
-            if (cur.right !=null) stack.push(cur.right);
-            if (cur.left != null) stack.push(cur.left);
+            cur = cur.right;
         }
         return res;
     }
-
-//    /**
-//     * 自己的丑陋版本
-//     * @param root
-//     * @return
-//     */
-//    public static List<Integer> inorderTraversal(TreeNode root) {
-//        List<Integer> res = new ArrayList<Integer>();
-//        if (root == null) return res;
-//        Stack<TreeNode> stack = new Stack<TreeNode>();
-//        TreeNode cur = root;
-//        while (cur != null || !stack.isEmpty()) {
-//            while (cur != null) {
-//                stack.push(cur);
-//                cur = cur.left;
-//            }
-//            cur = stack.pop();
-//            res.add(cur.val);
-//            cur = cur.right;
-//        }
-//        return res;
-//    }
 
     private static class TreeNode {
         int val;

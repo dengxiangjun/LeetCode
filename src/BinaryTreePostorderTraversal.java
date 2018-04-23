@@ -1,18 +1,20 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * https://leetcode.com/problems/binary-tree-postorder-traversal/description/
  * Given a binary tree, return the postorder traversal of its nodes' values.
- * <p>
+ * <p/>
  * Example:
- * <p>
+ * <p/>
  * Input: [1,null,2,3]
  * 1
  * \
  * 2
  * /
  * 3
- * <p>
+ * <p/>
  * Output: [3,2,1]
  * Follow up: Recursive solution is trivial, could you do it iteratively?
  * Created by admin on 2018/4/23.
@@ -32,7 +34,17 @@ public class BinaryTreePostorderTraversal {
     }
 
     public static List<Integer> postorderTraversal(TreeNode root) {
-        return null;
+        List<Integer> res = new ArrayList<Integer>();
+        if (root == null) return res;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            res.add(0, cur.val);
+            if (cur.left != null) stack.push(cur.left);
+            if (cur.right != null) stack.push(cur.right);
+        }
+        return res;
     }
 
     private static class TreeNode {
