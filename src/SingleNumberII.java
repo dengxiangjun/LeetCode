@@ -25,6 +25,17 @@ public class SingleNumberII {
     }
 
     public static int singleNumber(int[] nums) {
-        return 0;
+        int[] bit = new int[32];//把每个数字的bit相应位加起来
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < 32; j++) {
+                bit[j] += nums[i] >>> j & 1;
+            }
+        }
+
+        int res = 0;
+        for (int i = 0; i < 32; i++) {
+            if (bit[i] % 3 != 0) res += (bit[i] % 3) << i;//所有数字的bit加起来的和对3取模，如果不为0，则说明是只出现一次的数字的bit位
+        }
+        return res;
     }
 }
