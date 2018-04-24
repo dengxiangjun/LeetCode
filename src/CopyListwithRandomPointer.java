@@ -46,8 +46,6 @@ public class CopyListwithRandomPointer {
             copy.random = map.get(entry.getKey().random);
         }
         return map.get(head);
-
-
     }
 
 
