@@ -15,13 +15,17 @@ public class ReverseLinkedList {
         System.out.println(res);
     }
 
+    /**
+     * 递归实现
+     * @param head
+     * @return
+     */
     public static ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null) return head;
-        ListNode pre = reverseList(head.next);
+        if (head == null || head.next == null) return head;//返回最后一个元素的地址
+        ListNode reverseHead = reverseList(head.next);
         head.next.next = head;
         head.next = null;
-
-        return pre;
+        return reverseHead;//永远返回的是最后一个元素的地址
     }
 
 

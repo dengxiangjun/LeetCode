@@ -1,24 +1,24 @@
 /**
  * https://leetcode.com/problems/insertion-sort-list/description/
  * Sort a linked list using insertion sort.
- * <p>
- * <p>
+ * <p/>
+ * <p/>
  * A graphical example of insertion sort. The partial sorted list (black) initially contains only the first element in the list.
  * With each iteration one element (red) is removed from the input data and inserted in-place into the sorted list
- * <p>
- * <p>
+ * <p/>
+ * <p/>
  * Algorithm of Insertion Sort:
- * <p>
+ * <p/>
  * Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list.
  * At each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there.
  * It repeats until no input elements remain.
- * <p>
+ * <p/>
  * Example 1:
- * <p>
+ * <p/>
  * Input: 4->2->1->3
  * Output: 1->2->3->4
  * Example 2:
- * <p>
+ * <p/>
  * Input: -1->5->3->4->0
  * Output: -1->0->3->4->5
  * Created by admin on 2018/4/23.
@@ -39,30 +39,24 @@ public class InsertionSortList {
         }
     }
 
+    /**
+     * 单链表的插入排序
+     * @param head
+     * @return
+     */
     public static ListNode insertionSortList(ListNode head) {
         if (head == null) return null;
-        ListNode dummyHead = new ListNode(Integer.MIN_VALUE), node = head.next;
-        dummyHead.next = head;
-        int cnt = 1;
+        ListNode dummyHead = new ListNode(Integer.MIN_VALUE), node = head;
         while (node != null) {
-            int i = 1;
-            ListNode prev = dummyHead, cur = dummyHead.next;
-            while (i < cnt && node.val > cur.val) {
-                prev = prev.next;
+            ListNode pre = dummyHead,cur = dummyHead.next;
+            while (cur != null && cur.val < node.val) {
+                pre = pre.next;
                 cur = cur.next;
-                i++;
-            }
-            ListNode last = cur;
-            while (i < cnt) {
-                last = last.next;
-                i++;
             }
             ListNode next = node.next;
-            prev.next = node;
-            last.next = node.next;
             node.next = cur;
+            pre.next = node;
             node = next;
-            cnt++;
         }
         return dummyHead.next;
     }
