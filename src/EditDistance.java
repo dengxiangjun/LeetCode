@@ -26,6 +26,15 @@ public class EditDistance {
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) dp[i][j] = dp[i - 1][j - 1];
                 else dp[i][j] = dp[i - 1][j - 1] + 1;//替换操作
                 dp[i][j] = Math.min(dp[i][j], Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1));
+
+//                // 增加操作：str1a变成str2后再加上b，得到str2b
+//                int insertion = dp[i][j-1] + 1;
+//                // 删除操作：str1a删除a后，再由str1变为str2b
+//                int deletion = dp[i-1][j] + 1;
+//                // 替换操作：先由str1变为str2，然后str1a的a替换为b，得到str2b
+//                int replace = dp[i-1][j-1] + (word1.charAt(i - 1) == word2.charAt(j - 1) ? 0 : 1);
+//                // 三者取最小
+//                dp[i][j] = Math.min(replace, Math.min(insertion, deletion));
             }
         }
 

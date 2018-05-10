@@ -29,8 +29,78 @@ public class SortList {
     }
 
     public static ListNode sortList(ListNode head) {
-        return null;
+        if (head == null || head.next == null) return head;
+        quickSort(head, null);
+        return head;
     }
+
+    private static void quickSort(ListNode head, ListNode tail) {
+        if (head == tail) return;
+        ListNode pivot = partition(head, tail);
+        quickSort(head, pivot);
+        quickSort(pivot.next, tail);
+    }
+
+    private static ListNode partition(ListNode head, ListNode tail) {
+        int val = head.val;
+        ListNode slow = head, fast = head.next;
+        while (fast != tail) {
+            if (fast.val < val) {
+                slow = slow.next;
+                swap(slow,fast);
+            }
+            fast = fast.next;
+        }
+        swap(slow,head);
+        return slow;
+    }
+
+    private static void swap(ListNode a, ListNode b){
+        int tmp = a.val;
+        a.val = b.val;
+        b.val  = tmp;
+    }
+//    /**
+//     * 归并排序
+//     *
+//     * @param head
+//     * @return
+//     */
+//    public static ListNode sortList(ListNode head) {
+//        if (head == null || head.next == null) return head;
+//        ListNode middle = getMiddle(head);
+//        ListNode next = middle.next;
+//        middle.next = null;
+//        return merge(sortList(head), sortList(next));
+//    }
+//
+//    private static ListNode getMiddle(ListNode head) {
+//        ListNode slow = head, fast = head;
+//        while (fast.next != null && fast.next.next != null) {
+//            slow = slow.next;
+//            fast = fast.next.next;
+//        }
+//        return slow;
+//    }
+//
+//    private static ListNode merge(ListNode a, ListNode b) {
+//        ListNode dummy = new ListNode(-1);
+//        ListNode cur = dummy;
+//        while (a != null && b!= null){
+//            if (a.val < b.val){
+//                cur.next = a;
+//                a = a.next;
+//            }
+//            else{
+//                cur.next = b;
+//                b = b.next;
+//            }
+//            cur = cur.next;
+//        }
+//        if (a != null) cur.next = a;
+//        else cur.next = b;
+//        return dummy.next;
+//    }
 
     private static class ListNode {
         int val;
