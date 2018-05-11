@@ -31,7 +31,7 @@ public class PermutationSequence {
         for (int i = 1; i <= n; i++) a.add(i);
         fib[0] = 1;
         String res = "";
-        for (int i = 1; i < n; i++) fib[i] = i * fib[i - 1];
+        for (int i = 1; i < n; i++) fib[i] = i * fib[i - 1];//i位数的全排列个数
         k--;
         for (int i = n; i > 0; i--) {
             int index = k / fib[i - 1];
