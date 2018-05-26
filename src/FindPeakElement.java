@@ -1,20 +1,20 @@
 /**
  * https://leetcode.com/problems/find-peak-element/description/
  * A peak element is an element that is greater than its neighbors.
- * <p>
+ * <p/>
  * Given an input array nums, where nums[i] ≠ nums[i+1], find a peak element and return its index.
- * <p>
+ * <p/>
  * The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
- * <p>
+ * <p/>
  * You may imagine that nums[-1] = nums[n] = -∞.
- * <p>
+ * <p/>
  * Example 1:
- * <p>
+ * <p/>
  * Input: nums = [1,2,3,1]
  * Output: 2
  * Explanation: 3 is a peak element and your function should return the index number 2.
  * Example 2:
- * <p>
+ * <p/>
  * Input: nums = [1,2,1,3,5,6,4]
  * Output: 1 or 5
  * Explanation: Your function can return either index number 1 where the peak element is 2,
@@ -24,19 +24,59 @@
 public class FindPeakElement {
 
     public static void main(String[] args) {
-        int[] a = {1,2};
+        int[] a = {1, 2};
         int res = findPeakElement(a);
         System.out.println(res);
     }
 
+    /**
+     * O(log(n))
+     *
+     * @param a
+     * @return
+     */
     public static int findPeakElement(int[] a) {
         if (a == null || a.length == 0) return -1;
-        if (a.length == 1 && a[0] == Integer.MIN_VALUE) return 0;
-        for (int i = 0; i < a.length; i++) {
-            int left = i == 0 ? Integer.MIN_VALUE : a[i - 1];
-            int right = i == a.length - 1 ? Integer.MIN_VALUE : a[i + 1];
-            if (a[i] > left && a[i] > right) return i;
+        if (a.length == 1) return 0;
+        int left = 0, right = a.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (a[mid] < a[mid + 1]) left = mid + 1;
+            else right = mid;
         }
-        return -1;
+        return left;
     }
+
+//    /**
+//     * O(n)
+//     *
+//     * @param a
+//     * @return
+//     */
+//    public static int findPeakElement(int[] a) {
+//        if (a == null || a.length == 0) return -1;
+//        if (a.length == 1) return 0;
+//        if (a[0] > a[1]) return 0;
+//        if (a[a.length - 2] < a[a.length - 1]) return a.length - 1;
+//        for (int i = 1; i < a.length - 1; i++) {
+//            if (a[i] > a[i + 1]) return i;
+//        }
+//        return -1;
+//    }
+
+//    /**
+//     * O(n)
+//     * @param a
+//     * @return
+//     */
+//    public static int findPeakElement(int[] a) {
+//        if (a == null || a.length == 0) return -1;
+//        if (a.length == 1 && a[0] == Integer.MIN_VALUE) return 0;
+//        for (int i = 0; i < a.length; i++) {
+//            int left = i == 0 ? Integer.MIN_VALUE : a[i - 1];
+//            int right = i == a.length - 1 ? Integer.MIN_VALUE : a[i + 1];
+//            if (a[i] > left && a[i] > right) return i;
+//        }
+//        return -1;
+//    }
 }
