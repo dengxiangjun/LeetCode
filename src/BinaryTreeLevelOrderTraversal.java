@@ -72,50 +72,50 @@ public class BinaryTreeLevelOrderTraversal {
 //        return res;
 //    }
 
-//    /**
-//     * 每次循环，队列中的元素个数就是下一层的节点个数
-//     *
-//     * @param root
-//     * @return
-//     */
-//    public static List<List<Integer>> levelOrder(TreeNode root) {
-//        List<List<Integer>> res = new ArrayList<List<Integer>>();
-//        if (root == null) return res;
-//        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-//        queue.add(root);
-//
-//        while (!queue.isEmpty()) {
-//            int levelSum = queue.size();
-//            List<Integer> levelList = new ArrayList<Integer>();
-//            for (int i = 0; i < levelSum; i++) {
-//                if (queue.peek().left != null) {
-//                    queue.add(queue.peek().left);
-//                }
-//                if (queue.peek().right != null) {
-//                    queue.add(queue.peek().right);
-//                }
-//                levelList.add(queue.poll().val);
-//            }
-//            res.add(levelList);
-//        }
-//        return res;
-//    }
-
+    /**
+     * 每次循环，队列中的元素个数就是下一层的节点个数
+     *
+     * @param root
+     * @return
+     */
     public static List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> wrapList = new LinkedList<List<Integer>>();
-        levelMaker(wrapList, root, 0);
-        return wrapList;
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if (root == null) return res;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int levelSum = queue.size();
+            List<Integer> levelList = new ArrayList<Integer>();
+            for (int i = 0; i < levelSum; i++) {
+                if (queue.peek().left != null) {
+                    queue.add(queue.peek().left);
+                }
+                if (queue.peek().right != null) {
+                    queue.add(queue.peek().right);
+                }
+                levelList.add(queue.poll().val);
+            }
+            res.add(levelList);
+        }
+        return res;
     }
 
-    public static void levelMaker(List<List<Integer>> list, TreeNode root, int level) {
-        if (root == null) return;
-        if (level >= list.size()) {
-            list.add(0, new LinkedList<Integer>());
-        }
-        levelMaker(list, root.left, level + 1);
-        levelMaker(list, root.right, level + 1);
-        list.get(list.size() - level - 1).add(root.val);
-    }
+//    public static List<List<Integer>> levelOrder(TreeNode root) {
+//        List<List<Integer>> wrapList = new LinkedList<List<Integer>>();
+//        levelMaker(wrapList, root, 0);
+//        return wrapList;
+//    }
+//
+//    public static void levelMaker(List<List<Integer>> list, TreeNode root, int level) {
+//        if (root == null) return;
+//        if (level >= list.size()) {
+//            list.add(0, new LinkedList<Integer>());
+//        }
+//        levelMaker(list, root.left, level + 1);
+//        levelMaker(list, root.right, level + 1);
+//        list.get(list.size() - level - 1).add(root.val);
+//    }
 
     private static class TreeNode {
         int val;
